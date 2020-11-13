@@ -2,13 +2,18 @@ package fastjson;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import fastjson.object.Student;
+
+import java.util.List;
 
 /**
  * Created by 刘权 on 2020-2-20.
  */
 public class ComplexJsonStringToJsonObject {
-    //复杂格式json字符串
-    private static final String COMPLEX_JSON_STR ="{" +
+	/**
+	 * 复杂格式json字符串
+	 */
+	private static final String COMPLEX_JSON_STR ="{" +
             "\"teacherName\": \"crystall\"," +
             "\"teacherAge\": 27," +
             "\"course\": {" +
@@ -25,7 +30,7 @@ public class ComplexJsonStringToJsonObject {
             "}";
     public static void main(String[] args) {
         testComplexJSONStrToJSONObject();
-        testJSONObjectToComplexJSONStr();
+        //testJSONObjectToComplexJSONStr();
     }
 
     /**
@@ -49,6 +54,8 @@ public class ComplexJsonStringToJsonObject {
 
         //4、取得json对象中的属性值为Array的属性
         JSONArray jsonArrayStudents = jsonObject.getJSONArray("students");
+		List<Student> staffList = JSONArray.parseArray(jsonArrayStudents.toString(),Student.class);
+		staffList.forEach(student -> System.out.println(student));
         //遍历JSONArray对象
         for (Object object : jsonArrayStudents) {
             //转换对象为接送对象
